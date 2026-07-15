@@ -497,7 +497,8 @@ button { font: inherit; }
   display: flex;
   gap: 1.4rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   padding-bottom: 0.5rem;
   scrollbar-width: none;
 }

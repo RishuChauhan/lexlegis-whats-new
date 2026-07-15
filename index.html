@@ -1211,10 +1211,36 @@
 </footer>
 
 <script>
-  // ---- highlight rail arrows ----
+  // ---- highlight rail: arrows + auto-advance + hover-to-scroll ----
   const rail = document.getElementById('rail');
-  document.getElementById('railPrev').addEventListener('click', () => rail.scrollBy({left: -480, behavior: 'smooth'}));
-  document.getElementById('railNext').addEventListener('click', () => rail.scrollBy({left: 480, behavior: 'smooth'}));
+  const railStep = () => Math.min(rail.clientWidth * 0.9, 480);
+  document.getElementById('railPrev').addEventListener('click', () => rail.scrollBy({left: -railStep(), behavior: 'smooth'}));
+  document.getElementById('railNext').addEventListener('click', () => rail.scrollBy({left: railStep(), behavior: 'smooth'}));
+
+  const railReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let railTimer = null;
+  function railAdvance() {
+    const maxScroll = rail.scrollWidth - rail.clientWidth;
+    if (rail.scrollLeft >= maxScroll - 4) {
+      rail.scrollTo({left: 0, behavior: 'smooth'});      // loop back to the start
+    } else {
+      rail.scrollBy({left: railStep(), behavior: 'smooth'});
+    }
+  }
+  function startRail() { if (!railReduceMotion && !railTimer) railTimer = setInterval(railAdvance, 4000); }
+  function stopRail() { clearInterval(railTimer); railTimer = null; }
+
+  // pause while the reader is interacting; resume when they leave
+  ['mouseenter', 'focusin', 'touchstart'].forEach(ev => rail.addEventListener(ev, stopRail, {passive: true}));
+  ['mouseleave', 'focusout'].forEach(ev => rail.addEventListener(ev, startRail));
+  document.addEventListener('visibilitychange', () => { document.hidden ? stopRail() : startRail(); });
+
+  // while hovering, a vertical wheel scrolls the rail horizontally
+  rail.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { rail.scrollLeft += e.deltaY; e.preventDefault(); }
+  }, {passive: false});
+
+  startRail();
 
   // ---- story dialogs ----
   const storyDialog = document.getElementById('storyDialog');

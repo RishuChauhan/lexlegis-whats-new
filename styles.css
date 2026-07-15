@@ -777,6 +777,10 @@ dialog.story[open] { animation: storyIn 0.32s cubic-bezier(0.2, 0.8, 0.3, 1); }
 .result-count strong { color: var(--ink); font-weight: 500; }
 @media (max-width: 760px) {
   .result-count { margin-left: 0; }
+  /* The toolbar wraps to multiple rows on narrow screens, so the sticky
+     header + toolbar stack is taller than the default 150px offset. Bump
+     scroll-padding so anchored entries/months clear it instead of hiding. */
+  html { scroll-padding-top: 276px; }
 }
 
 /* ---------------------------------------------------------- */

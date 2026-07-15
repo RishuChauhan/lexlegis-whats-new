@@ -1,0 +1,25 @@
+name: Email release notes
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send release notes by email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "[lexlegis-whats-new] Release ${{ github.event.release.tag_name }} published"
+          to: ${{ secrets.MAIL_USERNAME }}
+          from: "Lexlegis Release Bot <${{ secrets.MAIL_USERNAME }}>"
+          body: |
+            ${{ github.event.release.name }}
+            ${{ github.event.release.html_url }}
+
+            ${{ github.event.release.body }}

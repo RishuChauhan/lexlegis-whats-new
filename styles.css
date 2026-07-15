@@ -803,6 +803,49 @@ dialog.story[open] { animation: storyIn 0.32s cubic-bezier(0.2, 0.8, 0.3, 1); }
   letter-spacing: 0.08em;
 }
 
+/* Two-column feed with a sticky month timeline (hidden until there's room) */
+.feed-main { min-width: 0; }
+.month-timeline { display: none; }
+
+@media (min-width: 1160px) {
+  .feed-layout {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+  }
+  .month-timeline {
+    display: block;
+    position: sticky;
+    top: 164px;
+    align-self: start;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    border-left: 1px solid var(--hairline);
+  }
+  .month-timeline::-webkit-scrollbar { display: none; }
+  .tl-item {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--mute);
+    white-space: nowrap;
+    padding: 0.5rem 0 0.5rem 1.1rem;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tl-item:hover { color: var(--ink); }
+  .tl-item.active {
+    color: var(--ink);
+    border-left-color: var(--ink);
+    font-weight: 500;
+  }
+  .tl-item.hidden { display: none; }
+}
+
 .entry {
   display: grid;
   grid-template-columns: 150px 1fr 340px;

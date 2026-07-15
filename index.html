@@ -431,9 +431,12 @@
 
   <!-- FEED -->
   <div id="feedView">
+   <div class="feed-layout wrap">
+    <nav class="month-timeline" id="monthTimeline" aria-label="Jump to month"></nav>
+    <div class="feed-main">
 
     <!-- JULY 2026 -->
-    <section class="month-block wrap" data-month="2026-07">
+    <section class="month-block" data-month="2026-07">
       <div class="month-head"><h2>July 2026</h2><span class="month-count"></span></div>
 
       <article class="entry reveal" id="mira-launch" data-module="platform" data-type="launch" data-date="2026-07-14">
@@ -649,7 +652,7 @@
     </section>
 
     <!-- JUNE 2026 -->
-    <section class="month-block wrap" data-month="2026-06">
+    <section class="month-block" data-month="2026-06">
       <div class="month-head"><h2>June 2026</h2><span class="month-count"></span></div>
 
       <article class="entry reveal" id="feedback-controls" data-module="experience" data-type="new" data-date="2026-06-28">
@@ -983,7 +986,7 @@
     </section>
 
     <!-- EARLIER (compact) -->
-    <section class="month-block wrap" data-month="2026-05">
+    <section class="month-block" data-month="2026-05">
       <div class="month-head"><h2>May 2026</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="mfa" data-module="experience" data-type="new" data-date="2026-05-28">
         <div class="entry-date"><time datetime="2026-05-28">28 May 2026</time><span class="tag tag-new">New Feature</span></div>
@@ -995,7 +998,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2026-04">
+    <section class="month-block" data-month="2026-04">
       <div class="month-head"><h2>April 2026</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="faster" data-module="platform" data-type="improved" data-date="2026-04-15">
         <div class="entry-date"><time datetime="2026-04-15">15 Apr 2026</time><span class="tag tag-improved">Enhancement</span></div>
@@ -1007,7 +1010,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2026-03">
+    <section class="month-block" data-month="2026-03">
       <div class="month-head"><h2>March 2026</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="coverage" data-module="ask" data-type="improved" data-date="2026-03-20">
         <div class="entry-date"><time datetime="2026-03-20">20 Mar 2026</time><span class="tag tag-improved">Enhancement</span></div>
@@ -1019,7 +1022,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2026-02">
+    <section class="month-block" data-month="2026-02">
       <div class="month-head"><h2>February 2026</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="response-actions" data-module="ask" data-type="new" data-date="2026-02-12">
         <div class="entry-date"><time datetime="2026-02-12">12 Feb 2026</time><span class="tag tag-new">New Feature</span></div>
@@ -1031,7 +1034,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2026-01">
+    <section class="month-block" data-month="2026-01">
       <div class="month-head"><h2>January 2026</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="team-dashboard" data-module="experience" data-type="new" data-date="2026-01-22">
         <div class="entry-date"><time datetime="2026-01-22">22 Jan 2026</time><span class="tag tag-new">New Feature</span></div>
@@ -1043,7 +1046,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2025-12">
+    <section class="month-block" data-month="2025-12">
       <div class="month-head"><h2>December 2025</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="question-sets" data-module="interact" data-type="new" data-date="2025-12-11">
         <div class="entry-date"><time datetime="2025-12-11">11 Dec 2025</time><span class="tag tag-new">New Feature</span></div>
@@ -1055,7 +1058,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2025-11">
+    <section class="month-block" data-month="2025-11">
       <div class="month-head"><h2>November 2025</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="rephrase" data-module="ask" data-type="new" data-date="2025-11-18">
         <div class="entry-date"><time datetime="2025-11-18">18 Nov 2025</time><span class="tag tag-new">New Feature</span></div>
@@ -1067,7 +1070,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2025-10">
+    <section class="month-block" data-month="2025-10">
       <div class="month-head"><h2>October 2025</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="library-v1" data-module="library" data-type="launch" data-date="2025-10-16">
         <div class="entry-date"><time datetime="2025-10-16">16 Oct 2025</time><span class="tag tag-launch">Launch</span></div>
@@ -1079,7 +1082,7 @@
       </article>
     </section>
 
-    <section class="month-block wrap" data-month="2025-09">
+    <section class="month-block" data-month="2025-09">
       <div class="month-head"><h2>September 2025</h2><span class="month-count"></span></div>
       <article class="entry no-visual reveal" id="v1-launch" data-module="platform" data-type="launch" data-date="2025-09-18">
         <div class="entry-date"><time datetime="2025-09-18">18 Sep 2025</time><span class="tag tag-launch">Launch</span></div>
@@ -1090,6 +1093,8 @@
         </div>
       </article>
     </section>
+    </div><!-- /feed-main -->
+   </div><!-- /feed-layout -->
   </div><!-- /feedView -->
 
   <!-- EMPTY STATE -->
@@ -1279,6 +1284,32 @@
     en.dataset.search = (en.textContent + ' ' + (moduleKeywords[en.dataset.module] || '')).toLowerCase();
   });
 
+  // ---- month timeline: build links + scroll-spy (jumps respect scroll-padding) ----
+  const monthTimeline = document.getElementById('monthTimeline');
+  const tlByMonth = {};
+  if (monthTimeline) {
+    monthBlocks.forEach(b => {
+      if (!b.id) b.id = 'month-' + b.dataset.month;
+      const link = document.createElement('a');
+      link.className = 'tl-item';
+      link.href = '#' + b.id;
+      link.textContent = b.querySelector('.month-head h2').textContent;
+      link.dataset.month = b.dataset.month;
+      monthTimeline.appendChild(link);
+      tlByMonth[b.dataset.month] = link;
+    });
+    const spy = new IntersectionObserver((records) => {
+      records.forEach(r => {
+        if (!r.isIntersecting) return;
+        const active = tlByMonth[r.target.dataset.month];
+        if (!active) return;
+        Object.values(tlByMonth).forEach(x => x.classList.remove('active'));
+        active.classList.add('active');
+      });
+    }, { rootMargin: '-150px 0px -75% 0px', threshold: 0 });
+    monthBlocks.forEach(b => spy.observe(b));
+  }
+
   function applyFilters() {
     let visible = 0;
     entries.forEach(en => {
@@ -1288,7 +1319,10 @@
       if (show) { visible++; en.classList.add('in'); }
     });
     monthBlocks.forEach(b => {
-      b.classList.toggle('hidden', b.querySelectorAll('.entry:not(.hidden)').length === 0);
+      const empty = b.querySelectorAll('.entry:not(.hidden)').length === 0;
+      b.classList.toggle('hidden', empty);
+      const link = tlByMonth[b.dataset.month];
+      if (link) link.classList.toggle('hidden', empty);
     });
     emptyState.classList.toggle('visible', visible === 0);
     resultCount.innerHTML = '<strong>' + visible + '</strong> update' + (visible === 1 ? '' : 's');

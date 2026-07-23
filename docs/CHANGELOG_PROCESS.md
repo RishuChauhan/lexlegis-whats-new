@@ -40,6 +40,36 @@ Website  Internal Team   App / Zendesk
 (`.github/workflows/pr-check.yml`, `.github/workflows/release-notify.yml`)
 implements a subset of it — see "Current implementation vs. target" below.
 
+## Changelog Google Sheet (manual staging)
+
+Between the release email landing and the three-way fan-out, there's a manual
+staging step: a shared Google Sheet that acts as the single point of knowledge
+for every change before it's pushed out to the Internal Team, `app.lexlegis.ai`,
+and the website's What's New page.
+
+Template: [`changelog-sheet-template.csv`](changelog-sheet-template.csv) — import
+it into a new Google Sheet (File → Import → Upload) or paste it into an
+existing one. Columns:
+
+| Column | Purpose |
+|---|---|
+| `Release` | The version/release tag this entry shipped in |
+| `Date Merged` | When the PR merged |
+| `PR` | PR number/link |
+| `Title` | PR title (`type(module): summary`) |
+| `Type` | `feat` / `enhance` / `fix` / `internal` (/ `docs`, see caveat above) |
+| `Module` | `ask`, `interact`, `draft`, `mira`, `library`, `platform`, `experience` |
+| `User-Facing` | `yes` / `no`, copied from the PR label |
+| `Internal Summary` | Raw/technical description, for the Internal Team channel |
+| `External Summary (Customer-Facing)` | Rewritten customer-friendly copy — only needed when `User-Facing` is `yes` |
+| `Website Status` / `App/Zendesk Status` / `Internal Team Status` | `Not started` / `Ready` / `Published` per channel, tracked independently since they publish on different cadences |
+| `Owner` | Who's writing/publishing the customer-facing copy |
+| `Notes` | Anything channel-specific (e.g. Zendesk article link once published) |
+
+Workflow: after each weekly release email lands, add one row per entry, fill in
+the external summary for `user-facing: yes` items, then update the per-channel
+status columns as each one gets published.
+
 ## PR title
 
 `type(module): summary` — e.g. `feat(draft): research before drafting`.
@@ -89,15 +119,32 @@ To rehearse the label → PR → merge flow without touching real site content:
 ## Current implementation vs. target
 
 The diagram's final fan-out — **Website / Internal Team / App or Zendesk** — is
-not yet built. Today, `release-notify.yml` sends one email (the raw release
-notes) to a single address on every publish; there's no separate categorization
-step and no Zendesk/app delivery. Building that out means deciding, concretely:
+partly defined now (2026-07-23) and partly a future initiative:
 
-- **Website**: does this mean re-publishing the `user-facing: yes` cut to the
-  What's New site automatically, or is that still a manual copy from the release?
-- **Internal Team**: same email as today, or a separate internal channel (Slack, etc.)?
-- **App / Zendesk**: what's the actual delivery mechanism — Zendesk API, a help
-  center article, in-app changelog widget?
+### Internal Team — done, unchanged
+`release-notify.yml` emails the release notes on every publish. The sheet's
+`Internal Summary` column can be pasted in for cleaner grouping, but no new
+mechanism is needed here.
 
-Until those are answered, treat the three-way fan-out as a proposal, not a
-shipped pipeline.
+### Website — content PR, reusing existing infra
+This repo's site (`index.html`) is hand-authored static HTML — no CMS, no data
+file, each entry is a hardcoded `<article class="entry">` block. So "publish
+to Website" means:
+
+1. Take rows marked `Website Status: Ready` and `User-Facing: yes` from the sheet.
+2. Write the `External Summary` copy into a new `<article class="entry">`
+   block in `index.html`, matching the existing markup (`data-module`,
+   `data-type`, `data-date`).
+3. Open a PR for that content change through the normal labelled-PR flow,
+   squash-merge to `main`.
+4. GitHub Pages redeploys on merge — merged PR = `Website Status: Published`.
+
+This is manual today (someone writes the HTML by hand); worth automating later
+if entry volume grows, but there's no CMS to wire up yet.
+
+### App / Zendesk — not built, out of scope for this repo
+`app.lexlegis.ai` has **no in-app changelog surface today** — this is a new
+feature to design and build in that app's own codebase, not a distribution
+step onto existing infra. It needs its own scoping (in-app modal/banner vs.
+a Zendesk help-center article vs. both) once that work is picked up. Track it
+as a separate initiative; don't block the Website/Internal flow above on it.

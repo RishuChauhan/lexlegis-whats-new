@@ -34,3 +34,13 @@ Pick **one type** label and **one user-facing** flag:
 
 The **external** cut (customers) takes only `user-facing: yes` entries, rewritten.
 The **internal** cut (staff) takes the whole release, lightly grouped.
+
+## Mock demos of this pipeline
+
+To rehearse the label → PR → merge flow without touching real site content:
+
+- Branch name: `demo/pipeline-mock-<date>`.
+- Change: a one-line addition under `docs/demo-notes/`, never `index.html` or `styles.css`.
+- Labels: always `internal` + `user-facing: no` — a mock run has no user impact by definition.
+- Never draft or publish a real GitHub Release as part of a mock demo — that step emails the team and should stay a deliberate, manual action.
+
